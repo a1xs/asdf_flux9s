@@ -52,9 +52,9 @@ get_platform_old() {
   local platform
 
   case "$(uname | tr '[:upper:]' '[:lower:]')" in
-  darwin) platform="Darwin" ;;
-  linux) platform="Linux" ;;
-  windows) platform="Windows" ;;
+  darwin) platform="macos" ;;
+  linux) platform="linux" ;;
+  windows) platform="windows" ;;
   *)
     fail "Platform '$(uname)' not supported!"
     ;;
@@ -96,8 +96,8 @@ download_release() {
   version="$1"
   filename="$2"
 
-  url="$GH_REPO/releases/download/v{version}/flux9s-$(get_platform)-$(get_arch).$(get_extension)"
-  url_old="$GH_REPO/releases/download/${version}/flux9s-$(get_platform)-$(get_arch).$(get_extension)"
+  url="$GH_REPO/releases/download/v${version}/flux9s-$(get_platform)-$(get_arch).$(get_extension)"
+  url_old="$GH_REPO/releases/download/v${version}/flux9s-$(get_platform_old)-$(get_arch).$(get_extension)"
 
   echo "* Downloading $TOOL_NAME release $version..."
   curl "${curl_opts[@]}" -o "$filename" -C - "$url" ||
